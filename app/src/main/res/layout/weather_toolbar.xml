@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="@color/colorGrey"
+    android:elevation="8dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Minneapolis, MN"
+            android:textColor="@color/colorWhite"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/iv_setting_button"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintCircleRadius="5dp"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="15dp"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_city_degree_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:text="100&#176;"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="22dp"
+            android:foregroundGravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_city_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="50sp" />
+        <TextView
+            android:id="@+id/tv_city_weather_stat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:foregroundGravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_city_degree_day"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Clear"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.Toolbar>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WeekendAssigment3WeatherApp</string>
+    <string name="api_key">59522776659ba117cd7e6a6ffa40c063</string>
+    <string-array name="units_degree">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+
+    </string-array>
+</resources>
