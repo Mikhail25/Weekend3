@@ -1,5 +1,6 @@
 package com.example.weekendassigment3weatherapp.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -130,6 +131,9 @@ public class WeatherSettingsActivity extends AppCompatActivity {
         editor.putString(UNIT_SELECT, degreeSearchInput);
         editor.putInt(UNIT_SELECT_POS,degreeSelectedPos);
         editor.commit();
+
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK);
 
         Toast.makeText(this,"Data Saved", Toast.LENGTH_SHORT).show();
         finish();

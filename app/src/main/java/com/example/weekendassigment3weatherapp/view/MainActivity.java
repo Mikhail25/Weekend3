@@ -2,12 +2,14 @@ package com.example.weekendassigment3weatherapp.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements ViewContract{
     public TextView cityWeatherStatus;
     @BindView(R.id.iv_setting_button)
     public ImageView imageSettingsButton;
+    @BindView(R.id.loading_progress)
+    public ProgressBar loadingProgress;
 
     private static final String TAG = "MainActivity";
 
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements ViewContract{
     private String degree_unit;
     String temp_format = null;
     int averageTemp = 60;
+    private static final int CHANGE_SEARCH_SETTINGS = 7;
 
     Presenter presenter;
 
@@ -72,17 +77,33 @@ public class MainActivity extends AppCompatActivity implements ViewContract{
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CHANGE_SEARCH_SETTINGS){
+            if(resultCode == RESULT_OK){
+                loadData();
+                sendWeatherDataRequest(zip_code, degree_unit);
+
+            }
+        }
+    }
+
     private void loadData() {
+        cityName.setVisibility(View.INVISIBLE);
+        cityDegrees.setVisibility(View.INVISIBLE);
+        cityWeatherStatus.setVisibility(View.INVISIBLE);
+        loadingProgress.setVisibility(View.VISIBLE);
+
         SharedPreferences sharedPreferences = getSharedPreferences(
                 WeatherSettingsActivity.SHARED_PREFS, MODE_PRIVATE);
         zip_code = sharedPreferences.getInt(WeatherSettingsActivity.ZIP_INPUT,30350);
         degree_unit = sharedPreferences.getString(WeatherSettingsActivity.UNIT_SELECT,"metric");
-
     }
 
     private void openSetting() {
         Intent settingIntent = new Intent(this,WeatherSettingsActivity.class);
-        startActivity(settingIntent);
+        startActivityForResult(settingIntent,CHANGE_SEARCH_SETTINGS);
         overridePendingTransition(R.anim.enter_from_right,R.anim.exit_to_left);
     }
 
@@ -119,6 +140,11 @@ public class MainActivity extends AppCompatActivity implements ViewContract{
 
         weatherToolbar.setBackgroundColor(current_temp < averageTemp ?
                 getResources().getColor(R.color.colorCold): getResources().getColor(R.color.colorHot));
+
+        cityName.setVisibility(View.VISIBLE);
+        cityDegrees.setVisibility(View.VISIBLE);
+        cityWeatherStatus.setVisibility(View.VISIBLE);
+        loadingProgress.setVisibility(View.GONE);
     }
 
 
